@@ -8,7 +8,7 @@ vector<string> split(string s, char c) {
 	vector<string> res;
 	string tmp = "";
 
-	for (int i = 0; i < s.szie(); i++)
+	for (int i = 0; i < s.size(); i++)
 		if (s[i] == c)
 		{
 			res.push_back(tmp);

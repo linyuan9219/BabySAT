@@ -5,7 +5,6 @@
 #include <fstream>
 
 #include "Clause.h"
-#include "ultility.h"
 
 using namespace std;
 
@@ -48,11 +47,11 @@ public:
 
         vector<Clause*> tmp;
         for (int i = 0; i < clause_list.size(); i++)
-            for (int j = 0; j < clause_list[i].literal_list.size(); j++)
+            for (int j = 0; j < clause_list[i]->literal_list.size(); j++)
             {
-                int* key = clause_list[i].literal_list[j]
+                int* key = clause_list[i]->literal_list[j];
                 if (literal2clauses.count(key))
-                    literal2clauses[key] = clause_list[i];
+                    literal2clauses[key].push_back(clause_list[i]);
                 else
                 {
                     tmp.push_back(clause_list[i]);
@@ -66,12 +65,13 @@ public:
         if (unchosen_literal.empty())
             return false;
 
-        int* xi = unchosen_literal.pop_back();
+        int* xi = unchosen_literal[unchosen_literal.size() - 1];
+        unchosen_literal.pop_back();
         chosen_literal.push_back(xi);
         *xi = 1;
 
-        clause_list = clause_map[xi];
-        vector<Clause>* relevant_clauses = &literal2clauses[xi];
+        clause_list = literal2clauses[xi];
+        vector<Clause*> relevant_clauses = literal2clauses[xi];
         int relevant_clause_num = relevant_clauses.size();
         
         int status = -1;
@@ -79,15 +79,15 @@ public:
         {
             int r = relevant_clauses[i]->newLiteralSetted(xi);
             
-            if (r & 0x3 == 3)
+            if ((r & 0x3) == 3)
                 status &= -1;
-            else if (r & 0x3 == 0)
+            else if ((r & 0x3) == 0)
                 status = 0;
             else
                 ++setted_clause_num;
         }
 
-        if (setted_clause_num == size)
+        if (setted_clause_num == clause_list.size())
             return true;
         else if (status == -1)
             if (checkClauses())
@@ -96,14 +96,14 @@ public:
         // Flip 
         *xi = *xi ^ 1;
 
-        int status = -1;
+        status = -1;
         for (int i = 0; i < relevant_clause_num; i++) 
         {
             int r = relevant_clauses[i]->update();
             
-            if (r & 0x3 == 3)
+            if ((r & 0x3) == 3)
                 status &= -1;
-            else if (r & 0x3 == 0)
+            else if ((r & 0x3) == 0)
                 status = 0;
             else
                 ++setted_clause_num;
@@ -112,12 +112,14 @@ public:
                 --setted_clause_num;
         }
 
-        if (setted_clause_num == size)
+        if (setted_clause_num == clause_list.size())
             return true;
         else if (status == -1)
-            if (chekcClauses())
+            if (checkClauses())
                 return true;
 
+        unchosen_literal.push_back(xi);
+        chosen_literal.pop_back();
         return false;
     }
 };

@@ -17,6 +17,9 @@ vector<string> split(string s, char c) {
 		else
 			tmp += s[i];
 
+	if (tmp != "")
+		res.push_back(tmp);
+
 	return res;
 }
 

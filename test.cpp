@@ -6,5 +6,5 @@ int main()
 
 	SATSolver sat(filename);
 
-	cout << sat.checkClauses() << endl;
+	cout << sat.checkClauses(0) << endl;
 }

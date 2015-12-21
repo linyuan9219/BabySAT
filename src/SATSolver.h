@@ -36,9 +36,9 @@ public:
         while (line[0] == 'c')
             getline(fin, line);
 
-        vector<string> str_list = split(line, ' ');
+        vector<string> str_list = ultility::split(line, ' ');
 
-        literal_num = fromString(str_list[2]);
+        literal_num = ultility::fromString  (str_list[2]);
         cout << "initialize " << literal_num << " literals" << endl;
 
         int *tmp_int;
@@ -53,6 +53,8 @@ public:
         while (!fin.eof())
         {
             getline(fin, line);
+            if (line.empty())
+                continue;
             if (line[0] == 'c')
                 continue;
             clause_list.push_back(new Clause(line, unchosen_literal));

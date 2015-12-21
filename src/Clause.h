@@ -17,12 +17,12 @@ public:
 	Clause(string s, vector<int*>& literal) {
 		val = -1;
 
-		vector<string> str_list = split(s, ' ');
+		vector<string> str_list = ultility::split(s, ' ');
 
 		int index;
 		for (int i = 0; i < str_list.size() - 1; i++)
 		{
-			index = fromString(str_list[i]);
+			index = ultility::fromString(str_list[i]);
 			literal_list.push_back(literal[abs(index) - 1]);
 			literal2type[literal[abs(index) - 1]] = (index < 0) ? 0 : 1;
 		}

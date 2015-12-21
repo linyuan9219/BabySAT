@@ -2,7 +2,7 @@
 
 int main()
 {
-	string filename = "./sample/0.txt";
+	string filename = "./sample/aim-50-2_0-no-2.cnf";
 
 	SATSolver sat(filename);
 

@@ -16,3 +16,15 @@ via Sommarive 18, 38055 Povo (TN), Italy. Email: cimatti@irst.itc.it
 PA 15213, USA. Email: {emc,ofers}@cs.cmu.edu
 4 ATG, Synopsys, Inc., 700 East Middlefield Road, Mountain View, CA 94043,
 ]
+
+http://cstheory.stackexchange.com/questions/6735/what-is-the-difference-between-ltl-and-ctl
+https://en.wikipedia.org/wiki/Computation_tree_logic
+https://en.wikipedia.org/wiki/Linear_temporal_logic
+https://en.wikipedia.org/wiki/Conjunctive_normal_form
+
+http://www.cs.cmu.edu/~emc/papers/Papers%20In%20Refereed%20Journals/Bounded%20Model%20Checking%20Using%20Satisfiablility%20Solving.pdf
+
+https://en.wikipedia.org/wiki/Tseytin_transformation
+https://en.wikipedia.org/wiki/Karnaugh_map
+
+All slides from courses

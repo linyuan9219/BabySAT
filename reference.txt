@@ -1,2 +1,18 @@
 http://www.cs.tau.ac.il/thesis/thesis/nadel.pdf
 http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.261.3888&rep=rep1&type=pdf
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.261.3888&rep=rep1&type=pdf
+https://www.ime.usp.br/~mfinger/www-home/papers/conf/FWSBIA08.pdf
+[
+Bounded Model Checking
+Armin Biere1 Alessandro Cimatti2 Edmund M. Clarke3
+Ofer Strichman3 Yunshan Zhu4 ?
+1
+Institute of Computer Systems, ETH Zurich, 8092 Zurich, Switzerland.
+Email: biere@inf.ethz.ch
+2
+Istituto per la Ricerca Scientifica e Technologica (IRST)
+via Sommarive 18, 38055 Povo (TN), Italy. Email: cimatti@irst.itc.it
+3 Computer Science Department, Carnegie Mellon University, 5000 Forbes Avenue, Pittsburgh,
+PA 15213, USA. Email: {emc,ofers}@cs.cmu.edu
+4 ATG, Synopsys, Inc., 700 East Middlefield Road, Mountain View, CA 94043,
+]

@@ -1,0 +1,2 @@
+for a bound = 1 the property for model in: ./input/xp_s5_t7.model is violated by the following counterexample: 
+0 -> 3 -> wrong

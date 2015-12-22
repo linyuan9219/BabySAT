@@ -1,0 +1,2 @@
+for a bound = 5 the property for model in: ./input/lp_s7_t8.model is violated by the following counterexample: 
+0 -> 1 -> 2 -> 3 -> 4 -> 5 -> wrong

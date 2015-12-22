@@ -16,6 +16,7 @@ public:
 
 	Clause(string s, vector<int*>& literal) {
 		val = -1;
+		setted_literal_num = 0;
 
 		vector<string> str_list = ultility::split(s, ' ');
 
@@ -31,10 +32,15 @@ public:
 	// return value res = last two bits of previous val + last two bits of current val
 	int newLiteralSetted(int* xi) {
 
+		//cout << "setted_literal_num = " << setted_literal_num << endl;
+
 		++setted_literal_num;
 
 		int res = (val & 0x3) << 2;
 
+		//cout << "setted literal num is " << setted_literal_num << endl;
+		//cout << "val is " << val << endl;
+		
 		if ((literal2type[xi] ^ (*xi)) == 0 || val == 1)
 			val = 1;
 		else if (setted_literal_num == literal_list.size() && val == -1)

@@ -22,12 +22,16 @@ public:
 
     int setted_clause_num;
 
+    bool log;
+
     SATSolver() {
         setted_clause_num = 0;
     }
 
     SATSolver(string filename) {
         setted_clause_num = 0;
+
+        log = true;
 
         ifstream fin(filename.c_str());
 
@@ -111,35 +115,49 @@ public:
         vector<Clause*> relevant_clauses = literal2clauses[xi];
         int relevant_clause_num = relevant_clauses.size();
         
-        //cout << "relevant clause num is " << relevant_clause_num << endl;
+        if (log)
+            cout << "relevant clause num is " << relevant_clause_num << endl;
  
         int status = -1;
         for (int i = 0; i < relevant_clause_num; i++) 
         {
             int r = relevant_clauses[i]->newLiteralSetted(xi);
 
+            // cout << "index = " << i << endl;
+            // cout << "status becomes " << status << endl;
+
+            /*if ((r & 0x3) == 0)
+            {
+                cout << "index i = " << i << endl;
+                for (int j = 0; j < relevant_clauses[i]->literal_list.size(); i++)
+                    cout << relevant_clauses[i]->literal2type[relevant_clauses[i]->literal_list[j]] << endl;
+            }*/
+            
             if ((r & 0x3) == 3)
-                status &= -1;
+                status = status;
             else if ((r & 0x3) == 0)
                 status = 0;
             else if (r != 5)
                 ++setted_clause_num;
         }
 
-        //cout << "status is " << status << endl;
-        //cout << "setted_clause_num = " << setted_clause_num << endl;
-
+        if (log)
+        {
+            cout << "status is " << status << endl;
+            cout << "setted_clause_num = " << setted_clause_num << endl;
+        }
         if (setted_clause_num == clause_list.size())
             return true;
         else if (status == -1)
         {
-            int backup = setted_clause_num;
+            //int backup = setted_clause_num;
             if (checkClauses(pos + 1))
                 return true;
-            setted_clause_num = backup;
+            //setted_clause_num = backup;
         }
 
-        //cout << "starting flip part" << endl;
+        if (log)
+            cout << "starting flip part" << endl;
         // Flip 
         *xi = 0;
 
@@ -159,21 +177,40 @@ public:
                 --setted_clause_num;
         }
 
-        //cout << "status is " << status << endl;
-        //cout << "setted_clause_num is " << setted_clause_num << endl;
+        if (log)
+        {
+            cout << "status is " << status << endl;
+            cout << "setted_clause_num is " << setted_clause_num << endl;
+        }
         if (setted_clause_num == clause_list.size())
             return true;
         else if (status == -1)
         {
-            int backup = setted_clause_num;
+            //int backup = setted_clause_num;
             if (checkClauses(pos + 1))
                 return true;
-            setted_clause_num = backup;
+            //setted_clause_num = backup;
         }
 
         *xi = -1;
         unchosen_literal.push_back(xi);
         chosen_literal.pop_back();
+
+        for (int i = 0; i < relevant_clause_num; i++) 
+        {
+            int r = relevant_clauses[i]->update();
+
+            if ((r & 0x3) == 3)
+                status &= -1;
+            else if ((r & 0x3) == 0)
+                status = 0;
+            else if (r != 5)
+                ++setted_clause_num;
+
+            if (r == 7 || r == 4)
+                --setted_clause_num;
+        }
+
         return false;
     }
 };
